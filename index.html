@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Charges</title>
+    <style>
+        img {
+
+            border-radius: 2rem;
+            border: 2px solid black;
+        }
+
+        h1 {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to right, lightgreen 10%, orange 90%);
+            color: black;
+        }
+
+        .tableclass {
+            border: solid black 7px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <table class="tableclass">
+
+        <tr>
+            <td>
+                <h1>Hotel Charges</h1>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3"><strong>Input number of nights, nightly charge, room service charge, telephone charge, and
+                    miscellaneous charges to compute room <br>
+                    charges, additinal charges, subtotal, tax and total charges for your stay at the hotel.</strong>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <form name="theform">
+                    <table>
+                        <tr>
+                            <td rowspan="17"><img src="hotel.jpg" style="width: 600px;"></td>
+                            <td style="float: left;"><strong>Room Charges:</strong></td>
+                            <td></td>
+                            <td rowspan="15"><img src="lamp.jpg" style="height: 400px; width: 200px;"></td>
+                        </tr>
+                        <tr>
+                            <td style="float: right;">Nights</td>
+                            <td><input name="nightsFmInput" size="10"></td>
+                        </tr>
+                        <tr>
+                            <td style="float: right;">Nightly Charge</td>
+                            <td><input name="nightlyFmInput" size="10"></td>
+
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <hr>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Additional Charges:</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="float: right;">Room Charges:</td>
+                            <td><input name="roomChargeFmInput" size="10"></td>
+                        </tr>
+                        <tr>
+                            <td style="float: right;">Telephone:</td>
+                            <td><input name="telephoneFmInput" size="10"></td>
+                        </tr>
+                        <tr>
+                            <td style="float: right;">Miscellaneous:</td>
+                            <td><input name="miscellaneousFmInput" size="10"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <hr>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Total Charges:</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="float: right;">Room Charges:</td>
+                            <td style="background-color: white; color: black; font-weight: bold;"
+                                id="roomResultFmOutput"></td>
+                        </tr>
+                        <tr>
+                            <td style="float: right;">Additional Charges:</td>
+                            <td style="background-color: white; color: black; font-weight: bold;"
+                                id="additionalResultFmOutput"></td>
+                        </tr>
+                        <tr>
+                            <td style="float: right;">Subtotal:</td>
+                            <td style="background-color: white; color: black; font-weight: bold;"
+                                id="subtotalResultFmOutput">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="float: right;">Tax: (8.25%)</td>
+                            <td style="background-color: white; color: black; font-weight: bold;"
+                                id="taxResultFmOutput"></td>
+                        </tr>
+                        <tr>
+                            <td style="float: right;">Total Charges:</td>
+                            <td style="background-color: white; color: black; font-weight: bold;"
+                                id="totalResultFmOutput"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <hr>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <input type="button" name="calc" value="Calculate" onclick="calculate();">
+                                <input type="button" name="clear" value="Clear" onclick="clearinfo();">
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <script>
+        function calculate() {
+
+            var night;
+            var nightly;
+            var roomCharge;
+            var telephone;
+            var miscellaneous;
+
+            var roomResult;
+            var additionalResult;
+            var subtotalResult;
+            var taxResult;
+            var totalResult;
+
+            night = parseFloat(document.theform.nightsFmInput.value);
+            nightly = parseFloat(document.theform.nightlyFmInput.value);
+            roomCharge = parseFloat(document.theform.roomChargeFmInput.value);
+            telephone = parseFloat(document.theform.telephoneFmInput.value);
+            miscellaneous = parseFloat(document.theform.miscellaneousFmInput.value);
+
+            roomResult = parseFloat(night * nightly);
+            additionalResult = parseFloat(roomCharge + telephone + miscellaneous);
+            subtotalResult = parseFloat(roomResult + additionalResult);
+            taxResult = parseFloat(subtotalResult * 0.0825);
+            totalResult = parseFloat(subtotalResult + taxResult);
+
+            document.getElementById("roomResultFmOutput").innerHTML = "$" + roomResult.toFixed(2);
+            document.getElementById("additionalResultFmOutput").innerHTML = " $" + additionalResult.toFixed(2);
+            document.getElementById("subtotalResultFmOutput").innerHTML = " $" + subtotalResult.toFixed(2);
+            document.getElementById("taxResultFmOutput").innerHTML = " $" + taxResult.toFixed(2);
+            document.getElementById("totalResultFmOutput").innerHTML = " $" + totalResult.toFixed(2);
+
+        }
+
+        function clearinfo() {
+
+            document.theform.nightsFmInput.value = " ";
+            document.theform.nightlyFmInput.value = " ";
+            document.theform.roomChargeFmInput.value = " ";
+            document.theform.telephoneFmInput.value = " ";
+            document.theform.miscellaneousFmInput.value = " ";
+
+            document.getElementById("roomResultFmOutput").innerHTML = " ";
+            document.getElementById("additionalResultFmOutput").innerHTML = " ";
+            document.getElementById("subtotalResultFmOutput").innerHTML = " ";
+            document.getElementById("taxResultFmOutput").innerHTML = " ";
+            document.getElementById("totalResultFmOutput").innerHTML = " ";
+
+            document.theform.nightsFmInput.focus();
+        }
+    </script>
+<a href="http://csnet.southtexascollege.edu/localuser/jcast183/index.html" style="color: black;">Go Back to
+    HOMEPAGE<br>
+    Jovanni Castillo Moreno</a>
+
+
+</body>
+
+</html>
